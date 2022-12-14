@@ -14,7 +14,7 @@ $arrayDatos = $pacienteController->listarPacientes();
             <th>Fecha Nacimiento</th>
             <th>Sexo</th>
             <th>Usuario</th>
-            <th><a href="#" class="btn btn-success">Adicionar</a>
+            <th><a href="crear.php" class="btn btn-success">Adicionar</a>
             </th>
         </tr>
         <?php
@@ -40,7 +40,7 @@ $arrayDatos = $pacienteController->listarPacientes();
             echo "<td>{$arrayDatos[$key]['PacFechaNacimiento']}</td>";
             echo "<td>{$arrayDatos[$key]['PacSexo']}</td>";
             echo "<td>{$arrayDatos[$key]['PacUsuario']}</td>";
-            echo '<td><a href="#" class="btn btn-warning">Editar</a></td>';
+            echo "<td><a href='editar.php?id={$arrayDatos[$key]['PacIdentificacion']}' class='btn btn-warning'>Editar</a></td>";
             echo "<td><a href='#' class='btn btn-danger'>Eliminar</a></td>";
             echo '</tr>';
         }

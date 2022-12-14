@@ -26,6 +26,20 @@
            return $arrayDatos;
         }
         
+        public function listarPaciente($id){
+           //echo "Entramos al metodo modelo listar";
+           $cadenaSql ="select * from pacientes where pacIdentificacion ={$id}";
+           //conectarnos a la base de datos para realizar la consulta
+           $objDato = ConectorBd::consultaRetorno($cadenaSql);
+           //$arrayDatos = $objDatos->fetch_assoc();
+           $arrayDatos = array();
+           for ($i=0;  $i < mysqli_num_rows($objDato); $i++){
+               //$p= readline($datos->fetch_assoc());
+               array_push($arrayDatos, $objDato->fetch_assoc()) ;
+           }
+           return $arrayDatos;
+        }
+        
         public function adicionar($paciente){
             //preparamos la cadena
             $pacienteReg = new PacienteModel;
@@ -47,8 +61,16 @@
         }
 
 
-        public function editar(){
-            
+        public function editar($paciente){
+            echo "metodo editar del PacienteModel.php";
+            /*
+            $cadenaSql = "update pacientes set PacNombres = '{$pacienteReg->getPacNombres()}', PacApellidos = '{$pacienteReg->getPacApellidos()}', "
+                    . "PacFechaNacimiento = '{$pacienteReg->getPacFechaNacimiento()}', PacSexo = '{$pacienteReg->getPacSexo()}' , "
+                    . "PacUsuario =  '{$pacienteReg->getPacUsuario()}', PacClave = md5('{$pacienteReg->getPacClave()}'"
+                    . "where pacIdentificacion = '{$pacienteReg->getPacIdentificacion()}'";
+            ConectorBd::consultaSimple($cadenaSql);        
+             * */
+             
         }
         
         public function eliminar(){

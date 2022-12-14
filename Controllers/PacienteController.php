@@ -9,14 +9,24 @@ include_once '/xampp/htdocs/Citas/Models/PacienteModel.php';
 //echo "Accion metodo GET: ". $accion;
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];
+    //echo "accion: ".$accion ."<br>";
     if ($accion == "Iniciar Sesion") {
         //llamamos al metodo iniciarSesion()
         PacienteController::iniciarSesion();
     }
-    if ($accion == "Registrar") {//aqui se compara
+    if ($accion == "Registrar") {//aqui se compara,es un registro de paciente sin usuario de sesion
         //llamamos al metodo registrar()
         PacienteController::registrar();
     }
+    if ($accion == "Adicionar") {//es un registro de paciente con usuario de sesion
+        //llamamos al metodo registrar()
+        PacienteController::adicionar();
+    }
+    if ($accion == "Editar") {//es un registro de paciente con usuario de sesion
+        //llamamos al metodo registrar()
+        PacienteController::editar();
+    }
+    
 }
 
 
@@ -59,6 +69,68 @@ class PacienteController {
         //redireccionar
         header("Location: ../crearCuenta.php");
     }
+    
+    public static function adicionar() {
+        $paciente = new PacienteModel();
+        //este controlador realiza la peticion al modelo BD.
+        //recibo los datos del paciente a registrar
+        $pacIdentificacion = $_POST["pacIdentificacion"];
+        $pacNombres = $_POST["pacNombres"];
+        $pacApellidos = $_POST["pacApellidos"];
+        $pacFechaNacimiento = $_POST["pacFechaNacimiento"];
+        $pacSexo = $_POST["pacSexo"];
+        $pacUsuario = $_POST["pacUsuario"];
+        $pacClave = $_POST["pacClave"];
+
+        //crear un objeto tipo Pacientes y eviar todos esto datos
+        //llamar al metodo ingresar, crear -- modelo (adicionar)
+        $paciente->setPacIdentificacion($pacIdentificacion);
+        $paciente->setPacNombres($pacNombres);
+        $paciente->setPacApellidos($pacApellidos);
+        $paciente->setPacFechaNacimiento($pacFechaNacimiento);
+        $paciente->setPacSexo($pacSexo);
+        $paciente->setPacUsuario($pacUsuario);
+        $paciente->setPacClave($pacClave);
+        //llamando la metodo registrar paciente
+        $paciente->adicionar($paciente);
+        //echo "entramos al metodo adicionar controlador<br>";
+        
+        //redireccionar
+        //PacienteController::listarPacientes();
+        header("location: /Citas/Views/Pacientes/lista.php");
+        ///Citas/Views/Pacientes/Controllers/PacienteController.php
+    }
+    
+    public static function editar() {
+        $paciente = new PacienteModel();
+        //este controlador realiza la peticion al modelo BD.
+        //recibo los datos del paciente a registrar
+        $pacIdentificacion = $_POST["pacIdentificacion"];
+        $pacNombres = $_POST["pacNombres"];
+        $pacApellidos = $_POST["pacApellidos"];
+        $pacFechaNacimiento = $_POST["pacFechaNacimiento"];
+        $pacSexo = $_POST["pacSexo"];
+        $pacUsuario = $_POST["pacUsuario"];
+        $pacClave = $_POST["pacClave"];
+
+        //crear un objeto tipo Pacientes y eviar todos esto datos
+        //llamar al metodo ingresar, crear -- modelo (adicionar)
+        $paciente->setPacIdentificacion($pacIdentificacion);
+        $paciente->setPacNombres($pacNombres);
+        $paciente->setPacApellidos($pacApellidos);
+        $paciente->setPacFechaNacimiento($pacFechaNacimiento);
+        $paciente->setPacSexo($pacSexo);
+        $paciente->setPacUsuario($pacUsuario);
+        $paciente->setPacClave($pacClave);
+        //llamando la metodo registrar paciente
+        $paciente->editar($paciente);
+        //echo "entramos al metodo adicionar controlador<br>";
+        
+        //redireccionar
+        //PacienteController::listarPacientes();
+        header("location: /Citas/Views/Pacientes/lista.php");
+        ///Citas/Views/Pacientes/Controllers/PacienteController.php
+    }
 
     public static function iniciarSesion() {
         $pacUsuario = $_POST["usuario"];
@@ -89,6 +161,14 @@ class PacienteController {
         $arrayDatos = $objPacienteModel->listar();
         /* fin listar los pacientes */
         return $arrayDatos;
+    }
+    
+    public static function listarPaciente() {
+        /* listar los pacientes */
+        $objPacienteModel = new PacienteModel();
+        $arrayDato = $objPacienteModel->listarPaciente($_GET['id']);
+        /* fin listar los pacientes */
+        return $arrayDato;
     }
 
 }
