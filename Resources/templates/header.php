@@ -1,7 +1,8 @@
 <?php
     include_once '/xampp/htdocs/Citas/Controllers/PacienteController.php';
     session_start();
-    if (!$_SESSION["USUARIO"]) header("/index.php?sms=2");
+    //if (!$_SESSION["USUARIO"]) header("/index.php?sms=2");
+    if (!isset($_SESSION["USUARIO"])) header("Location: /Citas/index.php?sms=2");
     
 //
 ?>
