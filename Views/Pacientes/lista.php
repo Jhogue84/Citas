@@ -1,5 +1,4 @@
 <?php
-include_once '../../Controllers/PacienteController.php';
 include_once '/xampp/htdocs/Citas/Resources/templates/header.php';
 $pacienteController = new PacienteController();
 $arrayDatos = $pacienteController->listarPacientes();
@@ -40,11 +39,12 @@ $arrayDatos = $pacienteController->listarPacientes();
             echo "<td>{$arrayDatos[$key]['PacFechaNacimiento']}</td>";
             echo "<td>{$arrayDatos[$key]['PacSexo']}</td>";
             echo "<td>{$arrayDatos[$key]['PacUsuario']}</td>";
-            echo "<td><a href='editar.php?id={$arrayDatos[$key]['PacIdentificacion']}' class='btn btn-warning'>Editar</a></td>";
-            echo "<td><a href='#' class='btn btn-danger'>Eliminar</a></td>";
+            echo "<td><a href='editar.php?id={$arrayDatos[$key]['PacIdentificacion']}'   class='btn btn-warning'>Editar</a></td>";
+            echo "<td><a href='eliminar.php?id={$arrayDatos[$key]['PacIdentificacion']}' onclick='return confirm(\"Desea Eliminar este registro\")' class='btn btn-danger'>Eliminar</a></td>";
             echo '</tr>';
         }
         ?>
+        
     </table>
 </div>
 <?php include_once '/xampp/htdocs/Citas/Resources/templates/footer.php'; ?>

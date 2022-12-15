@@ -24,7 +24,7 @@ foreach ($arrayDatos as $key => $value) {
                 PacSexo, PacUsuario, PacClave-->
                 <div class="mb-3">
                     <label for="pacIdentificacion" class="form-label">Identificacion</label>
-                    <input type="text" class="form-control" id="pacIdentificacion" name="pacIdentificacion" value="<?php echo $pacIdentificacion;?>" required>
+                    <input type="text" class="form-control" id="pacIdentificacion" name="pacIdentificacion" value="<?php echo $pacIdentificacion;?>" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="pacNombres" class="form-label">Nombres</label>
@@ -40,13 +40,13 @@ foreach ($arrayDatos as $key => $value) {
                 </div>
                 <div class="mb-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pacSexo" id="rdbFemenino" value="F" checked>
+                        <input class="form-check-input" type="radio" name="pacSexo" id="rdbFemenino" value="F" <?php if($pacSexo=='F') echo "checked"; ?> >
                         <label class="form-check-label" for="rdbFemenino">
                             Femenino
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pacSexo" value="M" id="rdbMasculino">
+                        <input class="form-check-input" type="radio" name="pacSexo" value="M" <?php if($pacSexo=='M') echo "checked"; ?> id="rdbMasculino">
                         <label class="form-check-label" for="rdbMasculino">
                             Masculino
                         </label>
@@ -58,7 +58,7 @@ foreach ($arrayDatos as $key => $value) {
                 </div>    
                 <div class="mb-3">
                     <label for="clave" class="form-label">Clave</label>
-                    <input type="password" class="form-control" id="clave" name="pacClave" value="<?php echo $pacClave;?>" required>
+                    <input type="password" class="form-control" id="clave" name="pacClave" value="<?php echo $pacClave;?>" minlength="3" maxlength="8" required>
                 </div>
                 <input type="submit" value="Editar" name="accion" class="btn btn-success" />
                 <a href="lista.php" class="btn btn-warning" >Cancelar</a>

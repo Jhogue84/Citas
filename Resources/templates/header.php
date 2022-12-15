@@ -1,3 +1,10 @@
+<?php
+    include_once '/xampp/htdocs/Citas/Controllers/PacienteController.php';
+    session_start();
+    if (!$_SESSION["USUARIO"]) header("/index.php?sms=2");
+    
+//
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -39,6 +46,12 @@ and open the template in the editor.
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <?php echo $_SESSION["NOMBRES"]. " ". $_SESSION["APELLIDOS"]; ?>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Citas/Controllers/PacienteController.php?accion=salir">Salir</a>
                         </li>
                     </ul>
                 </div>

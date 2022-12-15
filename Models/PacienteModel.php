@@ -61,20 +61,33 @@
         }
 
 
-        public function editar($paciente){
-            echo "metodo editar del PacienteModel.php";
-            /*
+        public function editar($pacienteReg){
+            //echo "metodo editar del PacienteModel.php";
+            //32 caracteres cuando se encripta MD
+            $clave = $pacienteReg->getPacClave();
+            
+            if(strlen($clave) == 32){
+                //dejamo la clave;
+            }
+            else{
+                //sino la encriptamos
+                $clave = md5($clave);
+            }
+            
+            
             $cadenaSql = "update pacientes set PacNombres = '{$pacienteReg->getPacNombres()}', PacApellidos = '{$pacienteReg->getPacApellidos()}', "
                     . "PacFechaNacimiento = '{$pacienteReg->getPacFechaNacimiento()}', PacSexo = '{$pacienteReg->getPacSexo()}' , "
-                    . "PacUsuario =  '{$pacienteReg->getPacUsuario()}', PacClave = md5('{$pacienteReg->getPacClave()}'"
+                    . "PacUsuario =  '{$pacienteReg->getPacUsuario()}', PacClave = '{$clave}'"
                     . "where pacIdentificacion = '{$pacienteReg->getPacIdentificacion()}'";
+            //echo $cadenaSql;
             ConectorBd::consultaSimple($cadenaSql);        
-             * */
+            
              
         }
         
-        public function eliminar(){
-            
+        public function eliminar($id){
+            $cadenaSql ="delete from pacientes where PacIdentificacion={$id}";
+            ConectorBd::consultaSimple($cadenaSql);
         }
         function getPacIdentificacion() {
             return $this->pacIdentificacion;

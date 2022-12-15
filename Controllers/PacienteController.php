@@ -37,6 +37,11 @@ if (isset($_GET["accion"])) {
         PacienteController::listarPacientes();
         header("location: /Citas/Views/Pacientes/lista.php");
     }
+    if ($accion == "salir") {
+        //llamamos al metodo iniciarSesion()
+        PacienteController::cerrarSesion();
+        header("location: /Citas/index.php");
+    }
 }
 
 class PacienteController {
@@ -151,9 +156,20 @@ class PacienteController {
             //echo "Usuario y/o contraseña son incorrectos.";
         } else {
             //echo "Bienvenido al sistema de informacion.";
+            session_start();
+            $_SESSION["USUARIO"] = $arrayPacienteLog["PacUsuario"];
+            $_SESSION["NOMBRES"] = $arrayPacienteLog["PacNombres"];
+            $_SESSION["APELLIDOS"] = $arrayPacienteLog["PacApellidos"];
             header("location: ../Views/principal.php");
         }
     }
+
+    public static function cerrarSesion(){
+        //capturar la sesion y destruirla
+        //session_start();
+        session_destroy();
+    }
+
 
     public static function listarPacientes() {
         /* listar los pacientes */

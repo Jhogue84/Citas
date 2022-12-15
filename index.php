@@ -2,6 +2,7 @@
     $sms = isset($_GET["sms"]);
     $mensaje="";
     if($sms == 1) $mensaje="Usuario y/o contraseña son incorrectos.";
+    if($sms == 2) $mensaje="NO tiene permisos.";
 ?>
 <html>
     <head>

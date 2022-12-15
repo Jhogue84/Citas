@@ -5,7 +5,7 @@
         <group>
             <file>file:/C:/xampp/htdocs/Citas/Models/PacienteModel.php</file>
             <file>file:/C:/xampp/htdocs/Citas/Controllers/PacienteController.php</file>
-            <file>file:/C:/xampp/htdocs/Citas/index.php</file>
+            <file>file:/C:/xampp/htdocs/Citas/Views/Pacientes/editar.php</file>
             <file>file:/C:/xampp/htdocs/Citas/Views/Pacientes/lista.php</file>
         </group>
     </open-files>
